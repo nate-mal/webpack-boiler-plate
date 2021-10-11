@@ -1,10 +1,11 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { watch } = require('fs');
 
 module.exports = {
   mode: 'development', //production
   entry: {
-    main: path.resolve(__dirname, 'src/app.js'),
+    main: path.resolve(__dirname, 'src/js/app.js'),
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -15,16 +16,15 @@ module.exports = {
   devtool: 'inline-source-map',
   devServer: {
     static: path.resolve(__dirname, 'dist'),
-    port: 5001, //default 8080
+    port: 4041, //default 8080
     open: true,
     hot: true,
-    watchContentBase: true,
   },
-  //loaders
+ 
   module: {
     rules: [
-      //css
-      { test: /\.css$/, use: ['style-loader', 'css-loader'] },
+      //css  
+      { test: /\.s[ac]ss$/, use: ['style-loader', 'css-loader', 'sass-loader'] },
       //images
       { test: /\.(svg|ico|png|webp|jpg|gif|jpeg)$/, type: 'asset/resource' },
       //js for babel
